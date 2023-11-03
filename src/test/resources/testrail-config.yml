@@ -1,0 +1,32 @@
+# Configuration settings for integration with TestRail and test execution behavior.
+Default:
+  base.url:  # Base URL for the TestRail instance. Required if interacting with TestRail.
+  username:  # Username for authentication with TestRail. Required if interacting with TestRail.
+  password:  # Password for authentication with TestRail. Required if interacting with TestRail.
+  
+  addResult: true  # Determines whether to add the test results to a TestRail run. Set to true to enable this feature.
+  
+  project.id: 156  # The ID of the project within TestRail. 
+  # Example: For project URL https://testrail.com/index.php?/projects/overview/156, the ID is 156.
+
+  test.plan.id: 46206  # The ID of the test plan within TestRail. 
+    # Example: For plan URL https://testrail.com/index.php?/plans/view/46206, the ID is 46206.
+
+  test.suite.id: 13009  # The ID of the test suite within TestRail.
+  # Example: For suite URL https://testrail.com/index.php?/suites/view/13009, the ID is 13009.
+
+  test.plan.close: false  # Controls whether the test plan should be closed after execution.
+  # When set to true, the test plan will be closed and no further additions or updates can be made to its test runs.
+
+  test.run.create.new: true  # Determines whether a new test run should be created for each test execution.
+  # Set to true to create a new test run, or false to use an existing run specified by test.run.id.
+
+  test.run.create.name: testing_integration  # The name for the new test run to be created in TestRail.
+  # This is only used if test.run.create.new is set to true.
+
+  test.run.id:  # The ID of an existing test run within TestRail to which results should be added.
+  # Required if test.run.create.new is set to false.
+  # Example: For run URL https://testrail.com/index.php?/runs/view/30419, you would enter the run ID here.
+
+  create.feature.files: false  # Determines whether feature files should be generated from the test cases.
+  # Set to true to enable feature file creation.
