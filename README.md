@@ -75,4 +75,4 @@ If `create.feature.files` is set to `true`, the integration will generate featur
 
 ## Support
 
-For additional help or to report issues you can reach me at jorge@automationqa.tech# testrail-integration
+For additional help or to report issues you can reach me at jorge@automationqa.tech

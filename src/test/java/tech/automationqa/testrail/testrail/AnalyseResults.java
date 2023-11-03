@@ -27,14 +27,15 @@ public class AnalyseResults {
         int statusId = STATUS_FAILED;
         for (StepResult testStep : stepResults) {
             String result = testStep.getResult().toString();
-            message.append(testStep.getStep().toString()).append(NEWLINE);
             if ("passed".equals(result)) {
                 statusId = STATUS_PASSED;
+                message.append(testStep.getStep().toString()).append(NEWLINE);
             } else if ("skip".equals(result)) {
                 statusId = STATUS_SKIPPED;
+                new StringBuilder("Skipped test at").append(NEWLINE).append(testStep.getStep().toString()).append(NEWLINE);
             } else if ("failed".equals(result)) {
                 statusId = STATUS_FAILED;
-                message.append("Error: ").append(testStep.getErrorMessage()).append(NEWLINE);
+                new StringBuilder("Failed test at").append(NEWLINE).append(testStep.getStep().toString()).append(NEWLINE).append(testStep.getErrorMessage()).append(NEWLINE);
             }
         }
 

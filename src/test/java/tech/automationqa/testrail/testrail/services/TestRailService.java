@@ -132,14 +132,14 @@ public class TestRailService {
 
             HashMap<String, Object> stepsDetails = getStepsDetails(result.getStepResults());
 
-            // There's a bug in the testrail api that doesn't allow an elapsed time of 0, it's fixed in recent versions but we are using an old version.
+            // There's a bug in the testrail api that doesn't allow an elapsed time of 0, it's fixed in recent versions, but we are using an old version.
             String elapsedTime = "1s";
             if (result.getDurationMillis() != 0) {
                 elapsedTime = result.getDurationMillis() + "s";
             }
 
             try {
-                resultList.put(buildTestCaseResultJson(matchingTestCase.getInt("id"), (Integer) stepsDetails.get("statusId"), stepsDetails.get("message").toString(), elapsedTime));
+                resultList.put(buildTestCaseResultJson(matchingTestCase.getInt("id"), (Integer) stepsDetails.get("status_id"), stepsDetails.get("comment").toString(), elapsedTime));
             } catch (JSONException e) {
                 LOGGER.error("Failed to create JSON result for test case: " + scenarioName, e);
             }
@@ -159,6 +159,7 @@ public class TestRailService {
             JSONObject run = createNewTestRun(suiteId);
             int runId = extractRunId(run);
             result.put(TEST_RUN_ID_KEY, runId);
+            result.put(TEST_SUITE_ID_KEY, suiteId);
         } else {
             int runId = getConfigurationInteger(TestrailProperty.TEST_RUN_ID).orElseThrow(() -> new RuntimeException(TEST_RUN_ID_NOT_CONFIGURED));
             int suiteId = api.getTestRun(runId).getInt(TEST_SUITE_ID_KEY);

@@ -22,6 +22,7 @@ public class APIClient {
 
     /**
      * Constructor for APIClient.
+     *
      * @param url The base URL of the TestRail API.
      */
     public APIClient(String url) {
@@ -30,6 +31,7 @@ public class APIClient {
 
     /**
      * Sets the user for API authentication.
+     *
      * @param user The username for the TestRail API.
      * @return The current instance of APIClient.
      */
@@ -40,6 +42,7 @@ public class APIClient {
 
     /**
      * Sets the password for API authentication.
+     *
      * @param password The password for the TestRail API.
      */
     public void setPassword(String password) {
@@ -48,33 +51,32 @@ public class APIClient {
 
     /**
      * Sends a GET request to the specified URI of the TestRail API.
+     *
      * @param uri The API endpoint URI.
      * @return An object containing the parsed JSON response.
      */
     public Object sendGet(String uri) {
         try {
             return sendRequest("GET", uri, null);
-        } catch (IOException | APIException e) {
-            e.printStackTrace();
-            return null;
+        } catch (Exception e) {
+            throw new APIException("Failed to send GET request due to network issues.", e);
         }
     }
 
     /**
      * Sends a POST request to the specified URI of the TestRail API.
-     * @param uri The API endpoint URI.
+     *
+     * @param uri  The API endpoint URI.
      * @param data The JSON string to be sent as the request body.
      * @return An object containing the parsed JSON response.
      */
     public Object sendPost(String uri, String data) {
         try {
-            return this.sendRequest("POST", uri, data);
-        } catch (IOException | APIException e) {
-            e.printStackTrace();
-            return null;
+            return sendRequest("POST", uri, data);
+        } catch (Exception e) {
+            throw new APIException("Failed to send POST request due to network issues.", e);
         }
     }
-
 
     private HttpURLConnection createConnection(String method, String uri) throws IOException {
         URL endpoint;
